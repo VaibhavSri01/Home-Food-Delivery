@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffdb58; /* Yellow background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-container {
+            background-color: #d32f2f; /* Red background */
+            color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .form-container.show-form {
+            display: block;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            border-color: #ffdb58; /* Yellow focus border */
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ffdb58; /* Yellow button */
+            color: red;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f1c40f; /* Lighter yellow on hover */
+        }
+
+        p {
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #ffdb58;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .toggle-link {
+            color: #ffdb58;
+        }
+
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div class="form-container login-container show-form">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" name="email" required>
+                
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="password" required>
+                
+                <button type="submit" class="btn" href = 'index.html'>Login</button>
+            </form>
+            <p>Don't have an account? <a href="#" id="showSignup" class="toggle-link">Sign Up</a></p>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div class="form-container signup-container">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="signupName">Full Name</label>
+                <input type="text" id="signupName" name="name" required>
+
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" name="email" required>
+
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" name="password" required>
+
+                <label for="signupConfirmPassword">Confirm Password</label>
+                <input type="password" id="signupConfirmPassword" name="confirmPassword" required>
+
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="#" id="showLogin" class="toggle-link">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Get the elements for both forms and the links to switch between them
+        const loginForm = document.querySelector('.login-container');
+        const signupForm = document.querySelector('.signup-container');
+        const showSignupLink = document.querySelector('#showSignup');
+        const showLoginLink = document.querySelector('#showLogin');
+
+        // Event listener to show the Sign-Up form
+        showSignupLink.addEventListener('click', () => {
+            loginForm.classList.remove('show-form');
+            signupForm.classList.add('show-form');
+        });
+
+        // Event listener to show the Login form
+        showLoginLink.addEventListener('click', () => {
+            signupForm.classList.remove('show-form');
+            loginForm.classList.add('show-form');
+        });
+
+        // Handle Login form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (email && password) {
+                alert('Login successful!');
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        // Handle Sign Up form submission
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            if (name && email && password && confirmPassword) {
+                alert('Sign-Up successful!');
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+    </script>
+</body>
+</html>
